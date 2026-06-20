@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Marmota</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Container principal que agrupa todas as partes do jogo. -->
+  <main class="game-container">
+    <!-- Cabecalho com titulo do jogo e escolha da dificuldade. -->
+    <section class="game-header">
+      <div>
+        <p class="eyebrow">Trabalho de JavaScript</p>
+        <h1>Jogo da Marmota</h1>
+      </div>
+
+      <div class="difficulty-box">
+        <label for="difficulty">Dificuldade</label>
+        <select id="difficulty">
+          <option value="easy">Facil</option>
+          <option value="medium" selected>Medio</option>
+          <option value="hard">Dificil</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Placar que mostra as informacoes atualizadas pelo JavaScript. -->
+    <section class="score-panel" aria-label="Informacoes da partida">
+      <div class="score-card">
+        <span>Pontos</span>
+        <strong id="score">0</strong>
+      </div>
+      <div class="score-card">
+        <span>Tentativas</span>
+        <strong id="attempts">0</strong>
+      </div>
+      <div class="score-card">
+        <span>Tempo</span>
+        <strong><span id="timer">30</span>s</strong>
+      </div>
+      <div class="score-card">
+        <span>Meta</span>
+        <strong id="target-score">10</strong>
+      </div>
+    </section>
+
+    <!-- Area de mensagens para orientar o jogador durante a partida. -->
+    <section class="message-box" id="message">
+      Escolha a dificuldade e clique em iniciar.
+    </section>
+
+    <!-- Tabuleiro com os buracos onde a marmota pode aparecer. -->
+    <section class="board" id="board" aria-label="Tabuleiro do jogo">
+      <button class="hole" type="button" aria-label="Buraco 1"></button>
+      <button class="hole" type="button" aria-label="Buraco 2"></button>
+      <button class="hole" type="button" aria-label="Buraco 3"></button>
+      <button class="hole" type="button" aria-label="Buraco 4"></button>
+      <button class="hole" type="button" aria-label="Buraco 5"></button>
+      <button class="hole" type="button" aria-label="Buraco 6"></button>
+      <button class="hole" type="button" aria-label="Buraco 7"></button>
+      <button class="hole" type="button" aria-label="Buraco 8"></button>
+      <button class="hole" type="button" aria-label="Buraco 9"></button>
+    </section>
+
+    <!-- Botoes principais para iniciar ou reiniciar o jogo. -->
+    <section class="controls">
+      <button id="start-button" type="button">Iniciar partida</button>
+      <button id="restart-button" type="button">Reiniciar</button>
+    </section>
+  </main>
+
+  <!-- Arquivo JavaScript responsavel pela logica do jogo. -->
+  <script src="script.js"></script>
+</body>
+</html>

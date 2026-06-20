@@ -1,0 +1,270 @@
+/* Variaveis de cores e sombra usadas em varias partes da pagina. */
+:root {
+  --background: #eef6e8;
+  --panel: #ffffff;
+  --primary: #2f7d46;
+  --primary-dark: #1f5f33;
+  --accent: #f5b942;
+  --danger: #d9534f;
+  --text: #213126;
+  --muted: #66736a;
+  --hole: #594031;
+  --shadow: 0 14px 32px rgba(41, 67, 47, 0.16);
+}
+
+/* Faz padding e bordas entrarem no tamanho total dos elementos. */
+* {
+  box-sizing: border-box;
+}
+
+/* Centraliza o jogo na tela e define o fundo principal. */
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #f6fbf2 0%, var(--background) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* Caixa branca principal onde todo o jogo aparece. */
+.game-container {
+  width: min(920px, 100%);
+  background: var(--panel);
+  border: 2px solid #dcebd7;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+/* Organiza o titulo e a escolha de dificuldade lado a lado. */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Texto pequeno acima do titulo principal. */
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+/* Area do seletor de dificuldade. */
+.difficulty-box {
+  display: grid;
+  gap: 6px;
+  min-width: 150px;
+}
+
+/* Estilo compartilhado dos textos menores de label e placar. */
+label,
+.score-card span {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+select,
+button {
+  font: inherit;
+}
+
+/* Aparencia do campo de selecao de dificuldade. */
+select {
+  border: 2px solid #cbdcc8;
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: #f9fcf7;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* Grade que organiza os cards de pontos, tentativas, tempo e meta. */
+.score-panel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Card individual de cada informacao do placar. */
+.score-card {
+  border: 1px solid #dcebd7;
+  border-radius: 8px;
+  padding: 14px;
+  background: #f9fcf7;
+  display: grid;
+  gap: 4px;
+}
+
+.score-card strong {
+  font-size: 1.7rem;
+}
+
+/* Caixa onde aparecem instrucoes, acertos e mensagens finais. */
+.message-box {
+  min-height: 48px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: #fff7df;
+  border: 1px solid #f2d58d;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+/* Visual da mensagem quando o jogador vence. */
+.message-box.win {
+  background: #e7f7e8;
+  border-color: #9fd5a4;
+  color: var(--primary-dark);
+}
+
+/* Visual da mensagem quando o jogador perde. */
+.message-box.lose {
+  background: #fdeaea;
+  border-color: #efaaaa;
+  color: var(--danger);
+}
+
+/* Tabuleiro em grade com 9 buracos. */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* Desenha cada buraco e prepara o espaco para a marmota aparecer. */
+.hole {
+  position: relative;
+  aspect-ratio: 1 / 0.72;
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 58%, #2e211a 0 35%, var(--hole) 36% 68%, #3b2a21 69% 100%);
+  box-shadow: inset 0 -10px 0 rgba(0, 0, 0, 0.18), 0 9px 0 #2d6f3c;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Cria a marmota usando um pseudo-elemento dentro do buraco. */
+.hole::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -72%;
+  width: 48%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50% 50% 42% 42%;
+  background:
+    radial-gradient(circle at 34% 38%, #1f1712 0 5%, transparent 6%),
+    radial-gradient(circle at 66% 38%, #1f1712 0 5%, transparent 6%),
+    radial-gradient(circle at 50% 56%, #3b2215 0 7%, transparent 8%),
+    #b87942;
+  border: 4px solid #7a4d2e;
+  transition: bottom 0.14s ease;
+}
+
+/* Cria a boca da marmota quando ela aparece. */
+.hole::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  width: 24%;
+  height: 7%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: transparent;
+  transition: background 0.14s ease;
+}
+
+/* Move a marmota para cima quando o JavaScript adiciona a classe active. */
+.hole.active::before {
+  bottom: 14%;
+}
+
+.hole.active::after {
+  background: #3b2215;
+}
+
+/* Destaca o buraco quando o jogador acerta a marmota. */
+.hole.hit {
+  outline: 4px solid var(--accent);
+}
+
+/* Mostra que os buracos estao bloqueados fora da partida. */
+.hole:disabled {
+  cursor: not-allowed;
+  opacity: 0.78;
+}
+
+/* Organiza os botoes de iniciar e reiniciar. */
+.controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Estilo principal dos botoes. */
+.controls button {
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 18px;
+  color: white;
+  background: var(--primary);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.controls button:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+/* O segundo botao usa uma cor diferente para indicar reinicio. */
+.controls button:last-child {
+  background: #596a60;
+}
+
+.controls button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Ajustes para telas menores, como celular ou tablet. */
+@media (max-width: 720px) {
+  body {
+    padding: 12px;
+  }
+
+  .game-container {
+    padding: 16px;
+  }
+
+  .game-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .score-panel {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .board {
+    gap: 10px;
+  }
+}
